@@ -1,0 +1,133 @@
+#lista 06
+resultados = [] # Lista vazia para armazenar os textos
+
+for i in range(5):
+    nome = input(f"Nome do Aluno {i+1}: ")
+    nota = float(input(f"Nota do Aluno {i+1}: "))
+    
+    # Lógica de decisão (if/elif/else)
+    if nota >= 7:
+        status = "Aprovado"
+    elif nota >= 5:
+        status = "Recuperação"
+    else:
+        status = "Reprovado"
+    
+    # Adicionando a string formatada à lista
+    resultados.append(f"{nome} - {status}")
+
+print("\n--- Relatório Final ---")
+print(resultados)
+
+
+candidatos_validos = [] # Lista principal
+
+for i in range(5):
+    print(f"\nCadastro do Candidato {i+1}:")
+    nome = input("Nome: ")
+    idade = int(input("Idade: "))
+    email = input("Email: ")
+    
+    # Checagem de idade (maioridade)
+    if idade >= 18:
+        # Criação de um Dicionário para o candidato
+        candidato = {
+            'nome': nome,
+            'idade': idade,
+            'email': email
+        }
+        # Inclusão do dicionário na lista de válidos
+        candidatos_validos.append(candidato)
+    else:
+        print("Candidato rejeitado: Menor de 18 anos.")
+
+print("\n--- Lista de Candidatos Válidos ---")
+for c in candidatos_validos:
+    print(c)
+
+# Função para calcular a multa
+def calcular_multa(peso_total):
+    limite = 100
+    if peso_total > limite:
+        excedente = peso_total - limite
+        return excedente * 4.00 # R$ 4,00 por quilo excedente
+    else:
+        return 0.0
+
+multa_acumulada = 0
+while True:
+    peso = float(input("Digite o peso da pescaria (ou 0 para sair): "))
+    if peso == 0:
+        break
+    
+    valor_multa = calcular_multa(peso)
+    
+    if valor_multa > 0:
+        print(f"Multa a pagar por esta pesca: R$ {valor_multa:.2f}"
+    else:
+        print("Peso dentro do limite. Nenhuma multa a pagar.")
+    
+    multa_acumulada += valor_multa
+
+print(f"\nTotal de multa acumulado no dia: R$ {multa_acumulada:.2f}")
+
+def calcular_imc(peso, altura):
+    return peso / (altura * altura) # Fórmula: IMC = PESO / (ALTURA * ALTURA) [cite: 215]
+
+def obter_classificacao(imc):
+    if imc < 18.5:
+        return "Abaixo do peso"
+    elif 18.5 <= imc <= 24.9
+        return "Peso normal" 
+    elif 25.0 <= imc <= 29.9:
+        return "Sobrepeso" 
+    else:
+        return "Obesidade" 
+
+# Programa Principal
+n = int(input("Quantas pessoas deseja avaliar? "))
+for i in range(n):
+    print(f"\n--- Pessoa {i+1} ---")
+    p = float(input("Peso (kg): "))
+    a = float(input("Altura (m): "))
+    
+    valor_imc = calcular_imc(p, a)
+    classe = obter_classificacao(valor_imc)
+    
+    print(f"Resultado: IMC {valor_imc:.2f} - {classe}")
+
+def celsius_para_fahrenheit(temp_c):
+    return (temp_c * 9/5) + 32 # Fórmula: F = (C * 9/5) + 32 
+
+def fahrenheit_para_celsius(temp_f):
+    return (temp_f - 32) * 5/9 # Fórmula: C = (F - 32) * 5/9
+
+print("1 - Converter Celsius para Fahrenheit")
+print("2 - Converter Fahrenheit para Celsius")
+opcao = input("Escolha a conversão (1 ou 2): ")
+
+valor = float(input("Digite a temperatura: "))
+
+if opcao == '1':
+    res = celsius_para_fahrenheit(valor)
+    print(f"{valor}°C é igual a {res:.2f}°F")
+elif opcao == '2':
+    res = fahrenheit_para_celsius(valor)
+    print(f"{valor}°F é igual a {res:.2f}°C")
+else:
+    print("Opção inválida.")
+
+import random
+
+
+def rolar_dado(lados):
+    return random.randint(1, lados) # Retorna número entre 1 e o total de lados
+
+print("--- Simulador de Batalha ---")
+input("Pressione Enter para Rolar para o Ataque (d20)...")
+ataque = rolar_dado(20) 
+print(f"Resultado do Ataque: {ataque}")
+
+input("Pressione Enter para Rolar para o Dano (d8)...")
+dano = rolar_dado(8) 
+print(f"Resultado do Dano: {dano}")
