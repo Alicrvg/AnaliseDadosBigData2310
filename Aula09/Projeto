@@ -1,0 +1,13 @@
+def finalizar_caixa(gerar_id_pedido,calcular_total):
+     valor_da_conta = calcular_total() 
+     pagamento= input('Qual a forma de pagamento?')
+     print('1=Cartão de credito')
+     print('2=Cartão de débito')
+     print('3=pix')
+     print('4=dinheiro')
+     if pagamento==1 and 2 and 3:
+         print('Pagamento de confirmado')
+     else:
+         troco = valor_pago - calcular_total
+         print(troco)
+     print(f'{gerar_id_pedido}"=",{calcular_total}')
