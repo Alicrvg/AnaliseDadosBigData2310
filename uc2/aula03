@@ -1,0 +1,53 @@
+import pandas as pd
+df = pd.read_excel('base_invest.xlsx', sheet_name= 'Transacoes')
+print(df.head(10))
+# ________________________________________________________
+# Agora que temos o nosso DataFrame, podemos realizar algumas análises básicas:
+# ● df.sum(): Calcula a soma de cada coluna numérica.
+# ● df.mean(): Calcula a média de cada coluna numérica.
+# ● df.max(): Encontra o valor máximo em cada coluna numérica.
+# ● df.min(): Encontra o valor mínimo em cada coluna numérica.
+# .mode()= calcula a moda
+#  .median()= calcula a mediana
+# ________________________________________________________
+# Vamos criar uma Series mais interessante, com notas de uma turma, usando índices
+# personalizados:
+# notas = pd.Series([9.5, 8.0, 7.5, 9.0], index=['João', 'Maria', 'Pedro', 'Ana'])
+# print(notas)
+# Daqui, podemos realizar consultas mais específicas:
+# print(notas['Maria']) # Acessando a nota de Maria
+# print(notas[2]) # Acessando a nota de Pedro
+# print(notas.mean()) # Calculando a média das notas
+# print(notas[notas > 8]) # Filtrando notas maiores que 8
+# print(notas.describe()) # Estatísticas descritivas das notas
+    # comandos que surgem a partir desse: 
+    #     count (): quantidade total de dados
+    #     mean(): média desses dados
+    #     max(): valor maximo dos dados
+    #     min(): valor minimo dos dados
+    #     var(): variancia
+    #     std(): desvio padrão
+    
+# ______________________________________________________________
+#ATIVIDADE DE AULA =
+# df_1 = pd.read_excel('base_invest.xlsx', sheet_name= 'HistoricoPrecos')
+# print(df_1)
+# df_2 = pd.read_excel('base_invest.xlsx', sheet_name= 'Ativo')
+# print(df_2)
+# df_3 = pd.read_excel('base_invest.xlsx', sheet_name= 'Participante')
+# print(df_3)
+
+df_compra=df[df['operacao']=='compra']
+df_venda=df[df['operacao']=='venda']
+# print(df_compra)
+# print(df_venda)
+max_compra_preco=df_compra['preco'].max()
+min_compra_preco=df_compra['preco'].min()
+max_venda_preco=df_venda['preco'].max()
+min_venda_preco=df_venda['preco'].min()
+print(max_compra_preco)
+print(min_compra_preco)
+print(max_venda_preco)
+print(min_venda_preco)
+
+#QUAL CNPJ TEM O ATIVO DE MAIOR VALOR 
