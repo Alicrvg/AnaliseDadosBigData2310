@@ -27,6 +27,12 @@ print(df.head(10))
     #     min(): valor minimo dos dados
     #     var(): variancia
     #     std(): desvio padrão
+  # ____________________________________
+    #     mode(): moda
+    #     sum(): soma
+    #     groupby(): agrupamento
+    #     percentile: calcula os quartis no numpy
+    #     quantile: calcula os quartis no pandas
     
 # ______________________________________________________________
 #ATIVIDADE DE AULA =
@@ -51,3 +57,31 @@ print(max_venda_preco)
 print(min_venda_preco)
 
 #QUAL CNPJ TEM O ATIVO DE MAIOR VALOR 
+#QUAL CNPJ TEM O ATIVO DE MAIOR VALOR 
+
+# Primeiro, calcule o valor total de cada transação (quantidade * preço).
+df_transacoes['valor_total'] = df_transacoes['quantidade'] * df_transacoes['preco']
+
+# Em seguida, agrupe as transações por 'id_ativo' para encontrar o valor total de cada ativo.
+valor_por_ativo = df_transacoes.groupby('id_ativo')['valor_total'].sum()
+
+# Encontre o 'id_ativo' com o maior valor total.
+id_ativo_maior_valor = valor_por_ativo.idxmax()
+
+# Para obter o CNPJ, mescle o DataFrame `df_ativo` com o resultado.
+cnpj_maior_valor = df_ativo[df_ativo['id_ativo'] == id_ativo_maior_valor]['cnpj'].iloc[0]
+
+print("--- CNPJ com o ativo de maior valor ---")
+print(f"O CNPJ para o ativo com o maior valor total é: {cnpj_maior_valor}")
+print("\n")
+
+
+# Pergunta 3: Qual valor total em transações de cada participante?
+
+# # Use .groupby() em 'id_participante' e depois .sum() na coluna 'valor_total'.
+# valor_por_participante = df_transacoes.groupby('id_participante')['valor_total'].sum()
+
+# print("--- Valor total de transação de cada participante ---")
+# print(valor_por_participante)
+
+
