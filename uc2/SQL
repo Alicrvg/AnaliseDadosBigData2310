@@ -1,0 +1,46 @@
+-- Construindo meu banco de dados relacional
+create database vendas_online;
+USE vendas_online;
+-- Primeira tabela: Produtos
+CREATE TABLE Produtos (
+id_produto INT PRIMARY KEY,
+nome varchar (100),
+categoria varchar (50),
+preco decimal (10,2),
+estoque int
+)
+TRUNCATE Produtos;
+select *FROM vendas_online.prondutos 
+
+CREATE TABLE Clientes( 
+id_clientes INT PRIMARY KEY,
+nome VARCHAR (255) NOT NULL,
+email VARCHAR (255) NOT NULL
+);
+Select *FROM Clientes;
+ALTER TABLE Clientes RENAME COLUMN nome TO nome_clientes; --MySQL v.5.0 inferior
+ALTER TABLE Clientes CHANGE nome nome_cliente VARCHAR(255); 
+
+CREATE TABLE Pedidos(
+id_pedido  INT PRIMARY KEY,
+id_clientes INT,
+data_pedido DATE,
+valor_total DECIMAL (10,2),
+id_produto INT,
+quantidade INT
+);
+ALTER TABLE Pedidos CHANGE data_produto data_pedido VARCHAR(255); 
+
+Select *FROM Pedidos;
+
+SELECT data_pedido, valor_total
+FROM pedidos
+WHERE data_pedido < "202-02-24";
+
+SELECT nome_clientes, email
+FROM clientes
+WHERE nome_clientes = "Daniela Ferreira"
+
+SELECT nome_produto; preco
+FROM produtos
+WHERE preco > 1000; 
