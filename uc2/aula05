@@ -1,0 +1,56 @@
+def obter_dados_do_banco(query):
+    try:
+        conexao = mysql.connector.connect(
+            host="127.0.0.1",
+            user="root",
+            password="",
+            database="venda_online"
+        )
+        cursor = conexao.cursor()
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        return resultados
+    except mysql.connector.Error as erro:
+        print(f"Erro ao conectar ao MySQL: {erro}")
+        return None
+    finally:
+        if 'conexao' in locals() and conexao.is_connected():
+            cursor.close()
+            conexao.close()
+
+# for linha in resultados:
+#     print(linha)
+
+query_produtos="SELECT * FROM Produtos"
+dados_filtrados= obter_dados_do_banco(query_produtos)
+
+
+query_cliente = "Select *FROM produtos"
+df_produtos=pd.DataFrame(obter_dados_do_banco(query_produtos), columns=['id_produto','nome_produto','categoria','preco','estoque'])
+print(df_produtos)                                                                                                                              
+
+precos_array=df_produtos['preco'].to_numpy()
+
+precos_array_final= np.array(precos_array).astype(float)
+print(precos_array_final)
+
+
+
+media = np.mean(precos_array)
+print(f"Média dos preços: R$ {media:.2f}")
+
+mediana = np.median(precos_array)
+print(f"Mediana dos preços: R$ {mediana:.2f}")
+
+distancia = (media - mediana) / mediana
+print(f"Distância entre a média e a mediana: {distancia * 100:.2f}%")
+
+distancia = (media - mediana) / mediana
+print(f"Distância entre a média e a mediana: {distancia * 100:.2f}%")
+
+# Visualizando a distribuição dos preços
+import matplotlib.pyplot as plt # Importando a biblioteca Matplotlib
+import seaborn as sns # Importando a biblioteca Seaborn
+sns.histplot(precos_array, kde=True) # kde=True adiciona a curva de densidade, traduzindo
+plt.title('Distribuição dos Preços dos Produtos')
+plt.show()
